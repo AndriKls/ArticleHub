@@ -1,0 +1,11 @@
+{%extends 'app/base.html'%}
+
+{% block title %}Delete Article{% endblock title %}
+{% block content %}
+    <h1>Delete Article</h1>
+    <p>Are you sure you want to delete "{{article.title}}"?</p>
+    <form method="POST">
+        {%csrf_token%}
+        <button type="submit">Delete</button>
+    </form>
+{%endblock%}
