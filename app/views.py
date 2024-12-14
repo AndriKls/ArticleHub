@@ -21,13 +21,17 @@ class ArticleListView(ListView):
 class ArticleCreateView(CreateView):
     template_name = 'app/create_article.html'
     model = Article
-    fields = ['title', 'status', 'content', 'word_count', 'twitter_post']
+    fields = ['title', 'status', 'content', 'twitter_post']
     success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
 
 class ArticleUpdateView(UpdateView):
     template_name = 'app/update_article.html'
     model = Article
-    fields = ['title', 'status', 'content', 'word_count', 'twitter_post']
+    fields = ['title', 'status', 'content', 'twitter_post']
     success_url = reverse_lazy('home')
     context_object_name = 'article'
 

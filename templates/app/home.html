@@ -3,10 +3,17 @@
 {% block title %}ArticleHub{% endblock title %}
 {% block content %}
     <h1>Articles</h1>
-    {%for article in articles%}
+
+    <a href="{%url 'create_article'%}">Create article</a>
+
+    {%if articles%}
     <ul>
-        <li>{{article.title}} with {{article.word_count}} words.</li>
+    {%for article in articles%}    
+        <li><a href="{%url 'update_article' article.id%}">{{article.title}}</a> with {{article.word_count}} word{{article.word_count | pluralize}} by {{article.creator | title}}.</li>
+    {%endfor%}    
     </ul>
-    {%endfor%}
+    {%else%}
+
+    {%endif%}
 
 {% endblock content %}

@@ -50,6 +50,26 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if DEBUG:
+    INSTALLED_APPS += [
+        "debug_toolbar"
+    ]
+
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware"
+    ]
+
+    import socket
+    
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    docker_ips = [ip[:-1] + "1" for ip in ips]
+
+    INTERNAL_IPS = docker_ips + ["127.0.0.1"]
+
+    DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: True,
+    }
+
 ROOT_URLCONF = 'articlehub.urls'
 
 TEMPLATES = [
@@ -101,6 +121,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "login"
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
