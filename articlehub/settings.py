@@ -27,18 +27,38 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = [
+    "allauth.account.auth_backends.AuthenticationBackend"
+]
+
 
 # Application definition
 
-INSTALLED_APPS = [
-    'app',
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
+
+SITE_ID = 1
+
+
+THIRD_PARTY_APPS = [
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+]
+
+PROJECT_APPS = [
+    'app',
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,27 +68,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
-if DEBUG:
-    INSTALLED_APPS += [
-        "debug_toolbar"
-    ]
 
-    MIDDLEWARE += [
-        "debug_toolbar.middleware.DebugToolbarMiddleware"
-    ]
-
-    import socket
-    
-    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-    docker_ips = [ip[:-1] + "1" for ip in ips]
-
-    INTERNAL_IPS = docker_ips + ["127.0.0.1"]
-
-    DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': lambda request: True,
-    }
 
 ROOT_URLCONF = 'articlehub.urls'
 
@@ -122,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = "account_login"
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -144,3 +147,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

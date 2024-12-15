@@ -11,12 +11,12 @@
             <li><a href="{%url 'home'%}">Articles</a></li>
             <li>
                 {%if user.is_authenticated%}
-                <form method="POST" action="{%url 'logout'%}">
+                <form method="POST" action="{%url 'account_logout'%}">
                     {% csrf_token %}
                     <button type="submit">Logout</button>
                 </form>
                 {%else%}
-                    <a href="{%url 'login'%}">Log in</a>
+                    <a href="{%url 'account_login'%}">Log in</a>
                 {%endif%}
             </li>
         </ul>

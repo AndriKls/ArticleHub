@@ -6,10 +6,10 @@ RUN mkdir /code
 WORKDIR /code
 
 #Kopeeri requirements.txt ja requirements-dev.txt
-COPY requirements.txt requirements-dev.txt ./
+COPY requirements.txt ./
 
 # Paigalda põhja ja arenduse sõltuvused
-RUN pip install --no-cache-dir -r requirements.txt -r requirements-dev.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Kopeeri kogu projektikood konteinerisse
 COPY . /code/
