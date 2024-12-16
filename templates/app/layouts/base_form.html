@@ -1,0 +1,38 @@
+{%extends 'app/base.html'%}
+
+{% block title %}{% endblock title %}
+{% block content %}
+{%endblock%}
+
+{% block page_js %}
+<script>
+    const contentMarkdown = new EasyMDE({
+        element: document.getElementById('id_content'),
+        spellChecker: false,
+        autoSave: {
+            enabled: true,
+            delay: 1000,
+            saveDelay: 5000,
+            uniqueId: 'article-content',
+        },
+        previewImages: true,
+        toolbar: [
+            'bold', 'italic', 'heading', '|',
+            'link', 'image', '|',
+            'code', 'quote', 'codeblock', '|',
+            'table', 'horizontalRule', '|',
+            'undo','redo', '|',
+            'fullscreen'
+        ],
+        status: false,
+        lineWrapping: true,
+        lineNumbers: true,
+        placeholder: 'Type your content here...',
+        tabSize: 4,
+        toolbarTips: true,
+        previewRender: function(text) {
+            return marked(text, { sanitize: true });
+        }
+    })
+</script>
+{% endblock page_js %}

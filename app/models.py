@@ -20,8 +20,12 @@ class UserProfile(AbstractUser):
 
     @property
     def article_count(self):
-        return.self.articles.count()
+        return self.articles.count()
 
+
+    @property
+    def written_words(self):
+        return self.articles.aggregate(models.Sum('word_count'))['word_count__sum'] or 0
 
 
 
