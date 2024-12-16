@@ -21,4 +21,4 @@ COPY . /code/
 EXPOSE 8000
 
 # Käivita Django arenguserver
-ENTRYPOINT ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["/code/start-django.sh"]

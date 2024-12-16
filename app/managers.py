@@ -15,7 +15,7 @@ class UserProfileManager(BaseUserManager):
         #kirjutab üle kui määratakse falsiks ilma teatamata
         extra_fields["is_staff"] = True
         extra_fields["is_superuser"] = True
-
+        return self.create_user(email, password, **extra_fields)
         #annab errori
         # extra_fields.setdefault('is_staff', True)
         # extra_fields.setdefault('is_superuser', True)
@@ -24,4 +24,4 @@ class UserProfileManager(BaseUserManager):
         #     raise ValueError('Superuser must have is_staff=True.')
         # if extra_fields.get('is_superuser') is not True:
         #     raise ValueError('Superuser must have is_superuser=True.')
-        # return self.create_user(email, password, **extra_fields)
+        

@@ -10,15 +10,13 @@ class Migration(migrations.Migration):
     ]
 
     def create_superuser(apps, schema_editor):
-        from django.contrib.auth import get_user_model
 
-        User = get_user_model()
+        User = apps.get_model('app', 'UserProfile')
         
-        if User.objects.exists():
+        if User.objects.filter(email='admin@example.com').exists():
             return
         
         superuser = User.objects.create_superuser(
-            username='andri',
             email='admin@example.com',
             password='1234',
             last_login=timezone.now()
