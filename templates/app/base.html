@@ -1,3 +1,6 @@
+{%load static%}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <link rel="stylesheet" href="{%static 'output.css'%}">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
     
 <body>
-    <nav>
+    <nav class="px-10 py-4 border-b border-gray-300 shadow-md">
         <ul>
             <li><a href="{%url 'home'%}">Articles</a></li>
             <li>
@@ -24,7 +29,7 @@
         </ul>
     </nav>
     {% block content %}
-    
+
     {% endblock content %}
     {%block page_js%}
     {%endblock%}

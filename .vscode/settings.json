@@ -2,6 +2,8 @@
     "python.languageServer": "Pylance",
     "emmet.includeLanguages": {
     "django-html": "html"
-}
+},
+    "css.lint.vendorPrefix": "ignore",
+
 
 }
