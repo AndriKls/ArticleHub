@@ -1,0 +1,65 @@
+{%extends 'app/base.html'%}
+{%load allauth%}
+{%load widget_tweaks%}
+
+{% block content %}
+<main class="max-w-7xl mx-auto mt-10 lg:mt-20">
+    <div class="flex flex-col items-center lg:flex-row lg:items-start space-y-6">
+        <div class="basis-3/5 lg:mt-10">
+            <h1 class="text-4xl font-bold tracking-tight leading-none lg:text-5xl xl:text-6xl">
+                <span class='md:block'>Write and collaborate</span>
+                <span class='md:block text-emerald-600'>
+                    <span class="text-black">on your</span> next piece
+            </span>
+            </h1>
+            <p class="mt-6 text-xl text-gray-600">Write on our platform for maximum productivity</p>
+        </div>
+        <div class="basis-2/5">
+           <div class="bg-gray-800 text-white rounded-lg">
+            <div class="p-6 lg:p-16">
+                <p class="text-xl font-semibold">Create your account</p>
+                <div class="mt-6">
+                    <form method="POST" class="space-y-6 mb-4">
+                        {% csrf_token %}
+                        <div>
+                            <label class="sr-only" for="{{form.email.id_for_label}}">Email</label>
+                            <div class="form-field">
+                                {% render_field form.email class="block text-black shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm border-gray-300 text-sm" %}
+                            </div>
+                        </div>
+                        <div>
+                            <label class="sr-only" for="{{form.password1.id_for_label}}">Password</label>
+                            <div class="form-field">
+                                {% render_field form.password1 class="block text-black shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm border-gray-300 text-sm" %}
+                            </div>
+                        </div>
+                        <div>
+                            <label class="sr-only" for="{{form.password2.id_for_label}}">Password</label>
+                            <div class="form-field">
+                                {% render_field form.password2 class="block text-black shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm border-gray-300 text-sm" %}
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm text-center">Already have an account? <a href="{%url 'account_login'%}" class="font-bold hover:underline">Sign in instead</a></p>
+                            <button type="submit" class="button primary w-full mt-2 text-sm">Create your account</button>
+                        </div>
+                    </form>
+                    {%if SOCIALACCOUNT_ENABLED%}
+                        {%include "socialaccount/snippets/login.html" with page_layout="entrance"%}
+
+                    {%endif%}
+                </div>
+            </div>
+            <div class="px-4 py-6 bg-gray-700 sm:px-10 rounded-b-lg">
+                <p class="text-xs leading-5">
+                    By signing up, you agree to our 
+                    <a href="#" class="font-medium hover:underline">Terms</a>, 
+                    <a href="#" class="font-medium hover:underline">Data Policy</a>,
+                    and <a href="#" class="font-medium hover:underline">Cookies Policy</a>.
+                </p>
+            </div>
+           </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
