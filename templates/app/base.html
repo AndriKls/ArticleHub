@@ -13,20 +13,26 @@
 
     
 <body>
+    {%url 'create_article' as create_new_url%}
+    {%url 'home' as your_articles_url%}
+    {%url 'account_email' as change_email_url %}
+
     <nav class="px-10 py-4 border-b border-gray-300 shadow-md">
-        <ul>
-            <li><a href="{%url 'home'%}">Articles</a></li>
-            <li>
+     
+        <div class="flex justify-end items-center gap-6 max-w-7xl mx-auto">
                 {%if user.is_authenticated%}
+                <a class="button primary" href="{%spaceless%}{%if request.path != create_new_url%}{{create_new_url}}{%else%} # {%endif%}{%endspaceless%}">Create new</a>
+                <a class="hover:shadow-underline hover:shadow-gray-300 {%if request.path == your_articles_url%} font-semibold {%endif%}" href="{{your_articles_url}}">Articles</a>
+                <a class="hover:shadow-underline hover:shadow-gray-300 {%if request.path == change_email_url%} font-semibold {%endif%}" href="{{change_email_url}}">Change email</a>
                 <form method="POST" action="{%url 'account_logout'%}">
                     {% csrf_token %}
-                    <button type="submit">Logout</button>
+                    <button class="hover:shadow-underline hover:shadow-gray-300" type="submit">Logout</button>
                 </form>
                 {%else%}
-                    <a href="{%url 'account_login'%}">Log in</a>
+                    <a class="button secondary text-sm" href="{%url 'account_login'%}">Log in</a>
+                    <a class="button primary text-sm" href="{%url 'account_signup'%}">Sign up</a>
                 {%endif%}
-            </li>
-        </ul>
+        </div>
     </nav>
     {% block content %}
 

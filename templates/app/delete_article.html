@@ -1,13 +1,14 @@
 {%extends 'app/base.html'%}
-
 {% block title %}Delete Article{% endblock title %}
 {% block content %}
-    <h1>Delete Article</h1>
-    <p>Are you sure you want to delete "{{article.title}}"?</p>
-    <form method="POST">
-        {%csrf_token%}
-        <button type="submit">Delete</button>
-    </form>
+<main class="max-w-2xl mx-auto flex flex-col items-center mt-10">
+    <h1 class="subtitle mb-2">Delete Article</h1>
+    <p class="text-lg mb-6">Are you sure you want to delete "{{article.title}}"?</p>
 
-    <a href="{%url 'home'%}">No, take me back</a>
+    <form method="POST" class="flex items-center gap-4">
+        {%csrf_token%}
+        <button class="button danger" type="submit">Yes, delete it</button>
+        <a class="button secondary" href="{%url 'home'%}">{%include "svgs/arrow-left.svg" with class="inline-block w-6 h-6 mt-[-2px] mr-2"%}No, take me back</a>
+    </form>
+</main>
 {%endblock%}
