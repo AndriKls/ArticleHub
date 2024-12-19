@@ -1,16 +1,14 @@
 {%extends 'app/layouts/base_form.html'%}
 {% block title %}Update Article{% endblock title %}
 
-{% block content %}
-    <h1>Edit Article</h1>
-    <p>{{article.word_count}} word{{article.word_count | pluralize}}.</p>
-    <p>Last edited on {{article.updated_at | date:"jS F Y"}}</p>
-    <form method="POST">
-        {%csrf_token%}
-        {{form.as_p}}
-        <button type="submit">Save</button>
-    </form>
+{% block article_stats %}
+    <p class="text-center">{{article.word_count}} word{{article.word_count | pluralize}} </p>
+    <p>Last edited on <span class="font-bold">{{article.updated_at | date:"jS F Y"}}</span></p>
+    {% endblock %}
 
-    <a href="{%url 'home'%}">Back to list</a>
-    <a href="{%url 'delete_article' article.id%}">Delete article</a>
-    {% endblock content %}
+{% block buttons %}
+<div class="flex justify-end gap-4">
+    <a class="button danger" href="{%url 'delete_article' article.id%}">Delete article</a>
+    <button class="button primary" type="submit">Save</button>
+</div>
+    {% endblock buttons %}

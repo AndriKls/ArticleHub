@@ -1,7 +1,34 @@
 {%extends 'app/base.html'%}
 
+{%load widget_tweaks%}
+
 {% block title %}{% endblock title %}
 {% block content %}
+<main class="max-w-7xl mx-auto mt-10">
+    <form method="POST">
+        {%csrf_token%}
+        <div class="mb-4">
+        {%render_field form.title class="text-4xl w-full rounded-md border-2 border-gray-200 focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Write a title for your article"%}
+        </div>
+        <div class="flex gap-10 mb-10 items-center">
+            {%render_field form.status class="text-xs border-none rounded-sm uppercase"%}
+            {% block article_stats %}
+            
+            {% endblock article_stats %}
+        </div>
+        <div class="mb-10">
+        {%render_field form.content%}
+        </div>
+
+        <div class="mb-10">
+            <p class="text-xl font-semibold mb-2">{{form.twitter_post.label}}</p>
+        {%render_field form.twitter_post rows=10 class="w-full"%}
+        </div>
+        {% block buttons %}
+        
+        {% endblock buttons %}
+    </form>
+</main>
 {%endblock%}
 
 {% block page_js %}
