@@ -8,7 +8,28 @@
 
 {% block buttons %}
 <div class="flex justify-end gap-4">
-    <a class="button danger" href="{%url 'delete_article' article.id%}">Delete article</a>
+    <a class="button danger" hx-get="{%url 'delete_article' article.id%}" hx-target="#dialog" hx-select="main">Delete article</a>
     <button class="button primary" type="submit">Save</button>
 </div>
     {% endblock buttons %}
+
+    {% block extra_body %}
+    <div id="modal" class="relative z-10 hidden">
+        <div class="bg-black/15 fixed inset-0"></div>
+        <div class="fixed inset-0 z-10 w-screen p-4">
+            <div id="dialog" class="max-w-lg mx-auto bg-white p-16 rounded-md shadow-lg"></div>
+        </div>
+    </div>
+    {% endblock extra_body %}
+    {% block page_js %}
+    {{block.super}}
+    <script type="application/javascript">
+        const modal = document.getElementById("modal");
+
+        htmx.on("htmx:afterSwap", function(e){
+            if (e.detail.target.id == "dialog"){
+                modal.classList.toggle("hidden");
+            }
+        })
+    </script>
+    {% endblock page_js %}

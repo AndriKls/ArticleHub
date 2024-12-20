@@ -16,15 +16,26 @@
     <h2 class="subtitle mb-6">Your latest articles</h2>
 
     <form method="GET" class="flex flex-col sm:flex-row gap-3">
-        <input class="text-black shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm border-gray-300 rounded-md" type="search" name="search" placeholder="Search articles" value="{{request.GET.search}}">
-        <button class="flex gap-1 button secondary item-center justify-center" type="submit">
-            {%include "svgs/magnifier.svg" with class="w-6 h-6 mr-2"%} Search
+        <input class="text-black shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm border-gray-300 rounded-md" 
+        type="search" name="search" placeholder="Search articles" value="{{request.GET.search}}"
+        hx-get="{{request.path}}"
+        hx-trigger="input changed delay:500ms, search"
+        hx-target="#article-results"
+        hx-select="#article-results"
+        hx-indicator="svg.loading"
+        hx-push-url="true">
+
+        <button class="flex gap-1 button secondary item-center justify-center [&>.loading.htmx-request.hidden]:!inline-block [&>.loading.htmx-request]:hidden" type="submit">
+            {%include "svgs/magnifier.svg" with class="loading w-6 h-6 mr-2"%} 
+            {%include "svgs/loading.svg" with class="loading w-6 h-6 mr-2 hidden motion-safe:animate-spin"%}
+            Search
         </button>
         <a href="{%url 'home'%}" class="button secondary text-center">Clear search</a>
     </form>
 
+    <div id="article-results">
     {%if articles%}
-    <ul>
+    <ul preload="mouseover">
     {%for article in articles%}    
         <li><a class="text-2xl flex items-center" href="{%url 'update_article' article.id%}">{{article.title}} <span class="ml-2 px-4 py-0.5 text-xs rounded-sm uppercase article-status-{{article.status}}">{{article.status}}</span></a> 
             <p class="text-sm"> {{article.word_count}} word{{article.word_count | pluralize}}.</p> </li>
@@ -46,6 +57,8 @@
 </div>
     {%endif%}
     {%else%}
+    <p>You have no articles yet.</p>
     {%endif%}
+</div>
 </main>
 {% endblock base_content %}

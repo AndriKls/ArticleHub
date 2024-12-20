@@ -1,3 +1,4 @@
+import time
 from typing import Any
 from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
@@ -23,6 +24,7 @@ class ArticleListView(LoginRequiredMixin,ListView):
     paginate_by = 5
 
     def get_queryset(self) -> QuerySet[Any]:
+        time.sleep(2)
         search = self.request.GET.get("search")
         queryset = super().get_queryset().filter(creator=self.request.user).order_by('-created_at')
         if search:
