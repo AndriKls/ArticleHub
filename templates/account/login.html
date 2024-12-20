@@ -15,7 +15,7 @@
         {%if form.errors%}
         {%for field, errors in form.errors.items%}
         {%for error in errors%}
-        <div class="p-2 m-2 text-sm text-red-700 bg-red-50 rounded-md border-red-300 border">
+        <div class="error">
             {{error}}
         </div>
         {%endfor%}

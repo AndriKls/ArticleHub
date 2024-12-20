@@ -33,6 +33,11 @@
                                 {% render_field form.password1 class="block text-black shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm border-gray-300 text-sm" %}
                             </div>
                         </div>
+                        {%if form.password1.errors%}
+                            <div class="error [&>ul]:space-y-2">
+                                {{form.password1.errors}}
+                            </div>
+                        {%endif%}
                         <div>
                             <label class="sr-only" for="{{form.password2.id_for_label}}">Password</label>
                             <div class="form-field">
