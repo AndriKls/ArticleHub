@@ -1,9 +1,9 @@
-{%extends 'app/base.html'%}
+{%extends 'base.html'%}
 
 {%load widget_tweaks%}
 
 {% block title %}{% endblock title %}
-{% block content %}
+{% block base_content %}
 <main class="max-w-7xl mx-auto mt-10">
     <form method="POST">
         {%csrf_token%}
@@ -29,7 +29,7 @@
         {% endblock buttons %}
     </form>
 </main>
-{%endblock%}
+{%endblock base_content%}
 
 {% block page_js %}
 <script>

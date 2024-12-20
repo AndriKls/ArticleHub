@@ -48,3 +48,23 @@
 .error {
     @apply p-2 m-2 text-sm text-red-700 bg-red-50 rounded-md border-red-300 border;
 }
+
+details > summary::-webkit-details-marker {
+    display: none;
+}
+
+input[type="radio"] {
+    @apply text-emerald-600 ml-1 h-4 w-4 focus:ring-emerald-500; 
+} 
+
+.allauth-form input[type="email"] {
+    @apply w-full rounded-md text-black;
+}
+
+.allauth-form p:has(input[type="email"]) {
+    @apply text-left;
+}
+
+.allauth-form p:has(input[type="email"]) label {
+    @apply font-bold;
+}

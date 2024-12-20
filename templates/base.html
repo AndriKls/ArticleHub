@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <link rel="stylesheet" href="{%static 'output.css'%}">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+    {% block extra_head %}
+    {% endblock extra_head %}
 
     
 <body>
@@ -34,9 +36,13 @@
                 {%endif%}
         </div>
     </nav>
-    {% block content %}
+    <div class="p-2 md:p- lg:p-6">
+        {% block base_content %}
 
-    {% endblock content %}
+        {% endblock base_content %}
+    </div>
+    {% block extra_body %}
+    {% endblock extra_body %}
     {%block page_js%}
     {%endblock%}
 </body>

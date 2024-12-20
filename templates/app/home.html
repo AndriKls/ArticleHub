@@ -1,8 +1,8 @@
-{%extends 'app/base.html'%}
+{%extends 'base.html'%}
 {%load humanize%}
 
 {% block title %}ArticleHub{% endblock title %}
-{% block content %}
+{% block base_content %}
     <main class="max-w-7xl mx-auto mt-10 p-2 md:p-4 lg:p-10">
     <h1 class="title mb-4">Welcome</h1>
 
@@ -26,4 +26,4 @@
 
     {%endif%}
 </main>
-{% endblock content %}
+{% endblock base_content %}
