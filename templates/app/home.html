@@ -15,6 +15,14 @@
 
     <h2 class="subtitle mb-6">Your latest articles</h2>
 
+    <form method="GET" class="flex flex-col sm:flex-row gap-3">
+        <input class="text-black shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm border-gray-300 rounded-md" type="search" name="search" placeholder="Search articles" value="{{request.GET.search}}">
+        <button class="flex gap-1 button secondary item-center justify-center" type="submit">
+            {%include "svgs/magnifier.svg" with class="w-6 h-6 mr-2"%} Search
+        </button>
+        <a href="{%url 'home'%}" class="button secondary text-center">Clear search</a>
+    </form>
+
     {%if articles%}
     <ul>
     {%for article in articles%}    
@@ -25,13 +33,13 @@
     {%if is_paginated%}
     <div class="flex flex-row items-center text-xl mt-6">
         {%if page_obj.has_previous%}
-            <a class="mx-2" href="?page={{page_obj.previous_page_number}}">
+            <a class="mx-2" href="?page={{page_obj.previous_page_number}}{%if request.GET.search%}&search={{request.GET.search}}{%endif%}">
             {%include "svgs/chevron.svg" with class="h-7 w-7 transform rotate-180 border border-black rounded-md p-1"%}
     </a>
     {%endif%}
     <span>Page {{page_obj.number}} of {{paginator.num_pages}}</span>
     {%if page_obj.has_next%}
-    <a class="mx-2" href="?page={{page_obj.next_page_number}}">
+    <a class="mx-2" href="?page={{page_obj.next_page_number}}{%if request.GET.search%}&search={{request.GET.search}}{%endif%}">
         {%include "svgs/chevron.svg" with class="h-7 w-7 border border-black rounded-md p-1"%}
     </a>
     {% endif %}

@@ -23,7 +23,10 @@ class ArticleListView(LoginRequiredMixin,ListView):
     paginate_by = 5
 
     def get_queryset(self) -> QuerySet[Any]:
+        search = self.request.GET.get("search")
         queryset = super().get_queryset().filter(creator=self.request.user).order_by('-created_at')
+        if search:
+            queryset = queryset.filter(title__search=search)
         return queryset.order_by('-created_at')
 
 
