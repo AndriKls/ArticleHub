@@ -18,7 +18,7 @@
     {%if articles%}
     <ul>
     {%for article in articles%}    
-        <li><a class="text-2xl flex items-center" href="{%url 'update_article' article.id%}">{{article.title}} <span class="ml-2 px-4 py-0.5 text-xs rounded-sm uppercase bg-gray-200">{{article.status}}</span></a> 
+        <li><a class="text-2xl flex items-center" href="{%url 'update_article' article.id%}">{{article.title}} <span class="ml-2 px-4 py-0.5 text-xs rounded-sm uppercase article-status-{{article.status}}">{{article.status}}</span></a> 
             <p class="text-sm"> {{article.word_count}} word{{article.word_count | pluralize}}.</p> </li>
     {%endfor%}    
     </ul>

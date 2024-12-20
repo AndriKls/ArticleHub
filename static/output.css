@@ -1337,6 +1337,21 @@ input[type="radio"]:focus {
   font-weight: 700;
 }
 
+.article-status-draft {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
+}
+
+.article-status-published {
+  --tw-bg-opacity: 1;
+  background-color: rgb(187 247 208 / var(--tw-bg-opacity, 1));
+}
+
+.article-status-inprogress {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 230 138 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:underline:hover {
   text-decoration-line: underline;
 }
@@ -1422,6 +1437,10 @@ input[type="radio"]:focus {
 
   .lg\:p-16 {
     padding: 4rem;
+  }
+
+  .lg\:p-6 {
+    padding: 1.5rem;
   }
 
   .lg\:text-3xl {
