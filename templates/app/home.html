@@ -22,8 +22,22 @@
             <p class="text-sm"> {{article.word_count}} word{{article.word_count | pluralize}}.</p> </li>
     {%endfor%}    
     </ul>
+    {%if is_paginated%}
+    <div class="flex flex-row items-center text-xl mt-6">
+        {%if page_obj.has_previous%}
+            <a class="mx-2" href="?page={{page_obj.previous_page_number}}">
+            {%include "svgs/chevron.svg" with class="h-7 w-7 transform rotate-180 border border-black rounded-md p-1"%}
+    </a>
+    {%endif%}
+    <span>Page {{page_obj.number}} of {{paginator.num_pages}}</span>
+    {%if page_obj.has_next%}
+    <a class="mx-2" href="?page={{page_obj.next_page_number}}">
+        {%include "svgs/chevron.svg" with class="h-7 w-7 border border-black rounded-md p-1"%}
+    </a>
+    {% endif %}
+</div>
+    {%endif%}
     {%else%}
-
     {%endif%}
 </main>
 {% endblock base_content %}

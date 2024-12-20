@@ -45,7 +45,7 @@
     @apply w-full rounded-md p-2;
 }
 
-.error {
+.error, .destructive {
     @apply p-2 m-2 text-sm text-red-700 bg-red-50 rounded-md border-red-300 border;
 }
 

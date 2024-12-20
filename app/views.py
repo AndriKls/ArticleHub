@@ -1,12 +1,12 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import redirect, render
+from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
 from .models import Article
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
 from django.views.generic import (
     CreateView,
-    DetailView,
     ListView,
     UpdateView,
     DeleteView,
@@ -20,9 +20,11 @@ class ArticleListView(LoginRequiredMixin,ListView):
     model = Article
     context_object_name = 'articles'
     ordering = ['-created_at']
+    paginate_by = 5
 
     def get_queryset(self) -> QuerySet[Any]:
-        return Article.objects.filter(creator=self.request.user).order_by('-created_at')
+        queryset = super().get_queryset().filter(creator=self.request.user).order_by('-created_at')
+        return queryset.order_by('-created_at')
 
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
@@ -53,3 +55,7 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.get_object().creator == self.request.user
+    
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        messages.success(request, "Article deleted successfully.", extra_tags="destructive")
+        return super().post(request, *args, **kwargs)

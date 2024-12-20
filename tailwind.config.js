@@ -13,5 +13,8 @@ module.exports = {
     require("@tailwindcss/typography"),
     
   ],
+  corePlugins: {
+    transform: true,
+},
 }
 
