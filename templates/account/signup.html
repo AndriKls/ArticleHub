@@ -47,12 +47,6 @@
                         </div>
                         
                         <div>
-                            <label class="sr-only" for="{{form.password2.id_for_label}}">Password</label>
-                            <div class="form-field">
-                                {% render_field form.password2 class="block text-black shadow-sm focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm border-gray-300 text-sm" %}
-                            </div>
-                        </div>
-                        <div>
                             <p class="text-sm text-center">Already have an account? <a href="{%url 'account_login'%}" class="font-bold hover:underline">Sign in instead</a></p>
                             <button type="submit" class="button primary w-full mt-2 text-sm">Create your account</button>
                         </div>
